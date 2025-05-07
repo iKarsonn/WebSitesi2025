@@ -3,7 +3,9 @@
     padding: 0;
 }
 
-
+.navbar-brand {
+    user-select: none;
+}
 
 
 .navbar-nav {
