@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* Genel reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar arka plan ve yüksekliği */
+.navbar {
+  background-color: rgba(120, 120, 120, 0.4);
+  height: 70px;
+}
+
+/* Navbar marka ismi */
+.navbar-brand {
+  user-select: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #202020;
+}
+
+/* Sosyal medya ikonları */
+.social-icon {
+  font-size: 1.4rem;
+  color: #333;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+.social-icon:last-child {
+  margin-right: 0;
+}
+
+.social-icon:hover {
+  color: #1da1f2; /* Twitter mavisi gibi */
+}
+
+/* Navbar menü - linkler */
+.navbar-nav {
+  display: flex;
+  justify-content: center; /* Ortala */
+  width: 100%;
+}
+
+.navbar-nav .nav-link {
+  padding: 8px 15px;
+  border-radius: 5px;
+  color: rgb(20, 20, 20);
+  transition: all 0.5s ease-in-out;
+}
+
+.navbar-nav .nav-link.active {
+  color: rgb(10, 165, 49);
+  font-weight: bold;
+  background-color: rgb(90, 90, 90);
+}
+
+.navbar-nav .nav-link:hover {
+  color: rgb(31, 206, 34);
+  background-color: rgb(90, 90, 90);
+}
+
+/* Giriş butonu */
+.btn-outline-success {
+  color: #28a745;
+  border: 2px solid #28a745;
+  padding: 6px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  user-select: none;
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+}
+
+/* Container içindeki flex ayarları */
+.container-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+/* Sosyal ikonlar ve giriş butonu hizalaması */
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive için - 991px altı */
+@media (max-width: 991px) {
+  .container-fluid {
+    flex-wrap: wrap;
+  }
+  .d-flex {
+    margin-bottom: 10px;
+  }
+  .navbar-nav {
+    justify-content: flex-start; /* Mobilde menü sola hizalı */
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+
+/**/
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+}
+
+
+h1, h3 {
+  color: #2c3e50;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 1.2rem;
+}
+
+.rounded-circle {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%; /* Bu zaten 'rounded-circle' sınıfında olabilir */
+}
+
+.social-links a {
+  font-size: 1.5rem;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #0d6efd;
+}
