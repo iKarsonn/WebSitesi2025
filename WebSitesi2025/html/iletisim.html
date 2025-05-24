@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styleiletisim.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Kişisel Web Sitesi</title>
@@ -51,11 +52,96 @@
   </div>
 </nav>
   
-<main class="container">
-    
+<main id="vueForm">
+    <h1>İletişim Formu</h1>
+
+    <form @submit.prevent="validateVue">
+      <input v-model="adSoyad" placeholder="Ad Soyad">
+      <div class="error" v-if="hatalar.adSoyad">{{ hatalar.adSoyad }}</div>
+
+      <input v-model="email" placeholder="Email">
+      <div class="error" v-if="hatalar.email">{{ hatalar.email }}</div>
+
+      <input v-model="telefon" placeholder="Telefon (Sadece rakam)">
+      <div class="error" v-if="hatalar.telefon">{{ hatalar.telefon }}</div>
+
+      <select v-model="konu">
+        <option disabled value="">Konu Seçin</option>
+        <option>Genel</option>
+        <option>Destek</option>
+        <option>Öneri</option>
+      </select>
+      <div class="error" v-if="hatalar.konu">{{ hatalar.konu }}</div>
+
+      <textarea v-model="mesaj" rows="5" placeholder="Mesajınız"></textarea>
+      <div class="error" v-if="hatalar.mesaj">{{ hatalar.mesaj }}</div>
+
+      <div class="butonlar">
+        <button type="button" @click="validateVanilla">JS ile Doğrula</button>
+        <button type="submit">Vue.js ile Gönder</button>
+        <button type="button" @click="temizle">Temizle</button>
+      </div>
+    </form>
   </main>
 
+  <script>
+  new Vue({
+    el: '#vueForm',
+    data: {
+      adSoyad: '',
+      email: '',
+      telefon: '',
+      konu: '',
+      mesaj: '',
+      hatalar: {}
+    },
+    methods: {
+      validateVue() {
+        this.hatalar = {};
+        if (!this.adSoyad) this.hatalar.adSoyad = "Ad Soyad boş olamaz.";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) this.hatalar.email = "Geçerli bir e-posta girin.";
+        if (!/^\d+$/.test(this.telefon)) this.hatalar.telefon = "Telefon sadece rakam içermelidir.";
+        if (!this.konu) this.hatalar.konu = "Konu seçilmelidir.";
+        if (!this.mesaj) this.hatalar.mesaj = "Mesaj boş olamaz.";
 
+        if (Object.keys(this.hatalar).length === 0) {
+          const formData = {
+            adSoyad: this.adSoyad,
+            email: this.email,
+            telefon: this.telefon,
+            konu: this.konu,
+            mesaj: this.mesaj
+          };
+
+          // Çoklu mesaj desteği
+          let formList = JSON.parse(sessionStorage.getItem('formList')) || [];
+          formList.push(formData);
+          sessionStorage.setItem('formList', JSON.stringify(formList));
+
+          window.location.href = "sonuc.html";
+        }
+      },
+      validateVanilla() {
+        let errors = [];
+        if (!this.adSoyad) errors.push("Ad Soyad boş olamaz.");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) errors.push("Geçerli bir e-posta girin.");
+        if (!/^\d+$/.test(this.telefon)) errors.push("Telefon sadece rakam içermelidir.");
+        if (!this.konu) errors.push("Konu seçilmelidir.");
+        if (!this.mesaj) errors.push("Mesaj boş olamaz.");
+        if (errors.length > 0) alert(errors.join("\n"));
+        else alert("Vanilla JS doğrulama başarılı!");
+      },
+      temizle() {
+        this.adSoyad = '';
+        this.email = '';
+        this.telefon = '';
+        this.konu = '';
+        this.mesaj = '';
+        this.hatalar = {};
+      }
+    }
+  });
+</script>
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
