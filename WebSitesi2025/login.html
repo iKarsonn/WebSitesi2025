@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Giriş Yap</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    form {
+      border: 1px solid #ccc;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+    }
+    input {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px;
+      width: 100%;
+      background-color: black;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <form id="loginForm" method="POST" action="login.php" onsubmit="return validateForm()">
+    <h2>Giriş Yap</h2>
+    <input type="text" name="kullanici_adi" placeholder="Mail adresinizi girin" required>
+    <input type="password" name="sifre" placeholder="Şifre girin" required>
+    <button type="submit">Giriş</button>
+  </form>
+
+  <script>
+    function validateForm() {
+      const email = document.querySelector('input[name="kullanici_adi"]').value;
+      const password = document.querySelector('input[name="sifre"]').value;
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("Lütfen geçerli bir mail adresi girin.");
+        return false;
+      }
+
+      if (!email || !password) {
+        alert("Alanlar boş bırakılamaz.");
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+</body>
+</html>
