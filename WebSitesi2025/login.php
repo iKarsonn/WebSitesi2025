@@ -9,7 +9,7 @@ $sifre = isset($_POST["sifre"]) ? trim($_POST["sifre"]) : '';
 
 // Boş kontrol
 if (empty($kullanici_adi) || empty($sifre)) {
-    header("Location: login.html");
+    header("Location: index.html");
     exit;
 }
 
@@ -26,7 +26,7 @@ if ($kullanici_adi_lower === $dogru_mail_lower && $sifre === $dogru_sifre) {
     exit;
 } else {
     // Başarısız giriş
-    echo "<script>alert('Hatalı kullanıcı adı veya şifre'); window.location.href='login.html';</script>";
+    echo "<script>alert('Hatalı kullanıcı adı veya şifre'); window.location.href='index.html';</script>";
     exit;
 }
 ?>
